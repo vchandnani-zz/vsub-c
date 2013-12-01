@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 
 void display_help()
 {
@@ -42,46 +43,55 @@ char *get_replacement_string()
 main()
 {
   char *ptr1, *ptr2, *ptr3;
-//  bool match;
+  char *match_ptr1;
+  int ctr1, ctr2;
+  int match_ctr1;
 
   display_help();
 
   str1[256] = get_archive_string();
   str2[256] = get_query_string();
   str3[256] = get_replacement_string();
-
   // search_string_for_query_string()
   // replace_search_string_with_query_string()
   // display_result_string()
 
-//  for( ptr1=str1; ptr1; ptr1++ )
- //   printf("char is %s", ptr1 );
+  //for( ptr1=str1, ctr1=0; ctr1<strlen(str1); ptr1++, ctr1++ )
+   // printf("char is %c", *ptr1 );
 
   printf("\n Archive String: %s", str1);
   printf("\n Query String: %s", str2);
   printf("\n Replacement String: %s", str3);
   printf("\n Result String: COMING SOON \n");
 
-//  match = false;
-  ptr2 = str2;
-/*
-  for( ptr1=str1; ptr1; ptr1++ )
+  ctr2 = 0;
+  match_ctr1 = 0;
+
+  for( ptr1=str1, ptr2=str2, ctr1=0; ctr1<strlen(str1); ptr1++, ctr1++ )
   {
-    printf("\n comparing %c with %c", *ptr1, *ptr2);
+    printf("\n archive string array index %d, comparing %c with %c", ctr1, *ptr1, *ptr2);
     if( *ptr1 == *ptr2 )
     {
+      match_ptr1 = ptr1;
       ptr2++;
-      if( *ptr2 == "\0" )
+      ctr2++;
+      if( ctr2 == strlen(str2) )
       {
-//	match = true;
-	printf("\n match!");
+	printf("\n MATCH: archive string array index %d, character %c", ctr1, *match_ptr1);
+	ptr2 = str2;
+	match_ctr1++;
+	ctr2 = 0;
       }
     }
     else
     {
       ptr2 = str2;
+      ctr2 = 0;
     }
-  } // end for() loop through str1
-*/
+  } 
+  if( match_ctr1 == 0)
+  {
+    printf("\n NO MATCH: archive string does not contain query string");
+  }
 
-} // end main
+}
