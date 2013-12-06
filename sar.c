@@ -3,12 +3,17 @@
 
 main()
 {
-  char str1[256], str2[256], str3[256];
-  char *ptr1, *ptr2, *ptr3;
+  // TO DO: string length limits
+  char str1[128], str2[32], str3[32], str4[1024];
+  char *ptr1, *ptr2, *ptr3, *ptr4, *ptr5;
   char *match_ptr1;
-
   int ctr1, ctr2;
   int match_ctr1;
+
+  ptr1 = ptr2 = ptr3 = ptr4 = ptr5 = NULL;
+  match_ptr1 = NULL;
+  ctr1 = ctr2 = 0;
+  match_ctr1 = 0;
 
   display_help();
 
@@ -24,21 +29,13 @@ main()
   scanf("%s", str3);
   fflush(stdin);
 
-  // search_string_for_query_string()
-  // replace_search_string_with_query_string()
-  // display_result_string()
-
-  printf("\n Archive String: %s", str1);
-  printf("\n Query String: %s", str2);
-  printf("\n Replacement String: %s", str3);
-  printf("\n Result String: COMING SOON \n");
-
   ctr2 = 0;
   match_ctr1 = 0;
+  ptr4 = str4;
 
   for( ptr1=str1, ptr2=str2, ctr1=0; *ptr1!='\0'; ptr1++, ctr1++ )
   {
-    printf("\n archive string array index %d, comparing %c with %c", ctr1, *ptr1, *ptr2);
+    printf("\n  archive string array index %d, comparing %c with %c", ctr1, *ptr1, *ptr2);
     if( *ptr1 == *ptr2 )
     {
       match_ptr1 = ptr1;
@@ -47,7 +44,21 @@ main()
       if( *ptr2 == '\0' )
       {
 	match_ptr1 = match_ptr1 - strlen(str2) + 1;
-	printf("\n MATCH: archive string contains query string at array index %d, character %c", ctr1-1, *match_ptr1);
+	printf("\n  MATCH: archive string contains query string at array index %d, character %c", ctr1-1, *match_ptr1);
+
+	// copy characters from beginning of archive string str1 until match location
+	for( ptr5=str1; ptr5<match_ptr1; ptr4++, ptr5++ ) 
+	{
+	  *ptr4 = *ptr5;
+	  printf("\n  STR1: COPY %c to %c", *ptr5, *ptr4);
+	}
+	// copy characters from replacement string str3 (replacing query string str2)
+	for( ptr5=str3; *ptr5!='\0'; ptr4++, ptr5++ )
+	{
+          *ptr4 = *ptr5;
+	  printf("\n  STR3: COPY %c to %c", *ptr5, *ptr4);
+	}
+
 	ptr2 = str2;
 	match_ctr1++;
 	ctr2 = 0;
@@ -59,11 +70,19 @@ main()
       ctr2 = 0;
     }
   } 
+
+  // terminate final result string pointer correctly
+  *ptr4 = '\0';
+
   if( match_ctr1 == 0)
   {
-    printf("\n NO MATCH: archive string does not contain query string");
+    printf("\n  The archive string \"%s\" does not contain query string \"%s\".", str1, str2);
   }
 
+  printf("\n  Archive String: %s", str1);
+  printf("\n  Query String: %s", str2);
+  printf("\n  Replacement String: %s", str3);
+  printf("\n  Final Result String: %s", str4);
 }
 
 display_help()
