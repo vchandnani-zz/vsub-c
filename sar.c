@@ -16,9 +16,6 @@ main()
   scanf("%s", str1);
   fflush(stdin);
 
-  for( ptr1=str1; *ptr1!='\0'; ptr1++ )
-    printf("char is %c", *ptr1);
-
   printf("  Enter the query string: ");
   scanf("%s", str2);
   fflush(stdin);
@@ -39,8 +36,7 @@ main()
   ctr2 = 0;
   match_ctr1 = 0;
 
-  for( ptr1=str1, ptr2=str2, ctr1=0; ctr1<strlen(str1); ptr1++, ctr1++ )
-//  for( ptr1=str1, ptr2=str2, ctr1=0; *ptr1!='\0'; ptr1++, ctr1++ )
+  for( ptr1=str1, ptr2=str2, ctr1=0; *ptr1!='\0'; ptr1++, ctr1++ )
   {
     printf("\n archive string array index %d, comparing %c with %c", ctr1, *ptr1, *ptr2);
     if( *ptr1 == *ptr2 )
@@ -48,9 +44,10 @@ main()
       match_ptr1 = ptr1;
       ptr2++;
       ctr2++;
-      if( ctr2 == strlen(str2) )
+      if( *ptr2 == '\0' )
       {
-	printf("\n MATCH: archive string array index %d, character %c", ctr1, *match_ptr1);
+	match_ptr1 = match_ptr1 - strlen(str2) + 1;
+	printf("\n MATCH: archive string contains query string at array index %d, character %c", ctr1-1, *match_ptr1);
 	ptr2 = str2;
 	match_ctr1++;
 	ctr2 = 0;
