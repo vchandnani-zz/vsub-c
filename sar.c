@@ -3,7 +3,7 @@
 
 main()
 {
-  // TO DO: string length limits
+  // TO DO: string length limits and validations
   char str1[128], str2[32], str3[32], str4[1024];
   char *ptr1, *ptr2, *ptr3, *ptr4, *ptr5;
   char *match_ptr1, *copy_ctr1, *copy_ptr2;
@@ -16,7 +16,7 @@ main()
   match_ctr1 = 0;
 
   display_help();
-  get_input_strings(str1, str2, str3);
+  get_strings(str1, str2, str3);
 
   ctr2 = 0;
   match_ctr1 = 0;
@@ -83,10 +83,7 @@ main()
     printf("\n  The archive string \"%s\" does not contain query string \"%s\".", str1, str2);
   }
 
-  printf("\n  Archive String: %s", str1);
-  printf("\n  Query String: %s", str2);
-  printf("\n  Replacement String: %s", str3);
-  printf("\n  Final Result String: %s", str4);
+  display_results(str1, str2, str3, str4);
 }
 
 display_help()
@@ -105,7 +102,7 @@ display_help()
   puts("  Result String:      \"hello people\"");
 }
 
-get_input_strings(str1, str2, str3)
+get_strings(str1, str2, str3)
 char str1[128], str2[32], str3[32];
 {
   printf("  Enter the archive string: ");
@@ -119,4 +116,13 @@ char str1[128], str2[32], str3[32];
   printf("  Enter the replacement string: ");
   scanf("%s", str3);
   fflush(stdin);
+}
+
+display_results(str1, str2, str3, str4)
+char str1[128], str2[32], str3[32], str4[1024];
+{
+  printf("\n  Archive String: %s", str1);
+  printf("\n  Query String: %s", str2);
+  printf("\n  Replacement String: %s", str3);
+  printf("\n  Final Result String: %s", str4);
 }
