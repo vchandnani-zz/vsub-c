@@ -6,12 +6,12 @@ main()
   // TO DO: string length limits and validations
   char str1[128], str2[32], str3[32], str4[1024];
   char *ptr1, *ptr2, *ptr3, *ptr4, *ptr5;
-  char *start_ptr1, *match_ptr1, *copy_ctr1, *copy_ptr2;
+  char *start_ptr1, *match_ptr1;
   int ctr1, ctr2;
   int match_ctr1;
 
   ptr1 = ptr2 = ptr3 = ptr4 = ptr5 = NULL;
-  start_ptr1 = match_ptr1 = copy_ctr1 = copy_ptr2 = NULL;
+  start_ptr1 = match_ptr1 = NULL;
   ctr1 = ctr2 = 0;
   match_ctr1 = 0;
 
@@ -26,12 +26,12 @@ main()
     printf("\n  archive string array index %d, comparing %c with %c", ctr1, *ptr1, *ptr2);
     if( *ptr1 == *ptr2 )
     {
+      match_ctr1++;
       match_ptr1 = ptr1;
       ptr2++;
       ctr2++;
       if( *ptr2 == '\0' )
       {
-	copy_ptr2 = match_ptr1;
 	match_ptr1 = match_ptr1 - strlen(str2) + 1;
 	printf("\n  MATCH: archive string contains query string at array index %d, character %c", ctr1-1, *match_ptr1);
 
@@ -51,7 +51,6 @@ main()
 	}
 
 	ptr2 = str2;
-	match_ctr1++;
 	ctr2 = 0;
       }
     }
@@ -72,9 +71,9 @@ main()
   // terminate final result string
   *ptr4 = '\0';
 
-  if( match_ctr1 == 0)
+  if(match_ctr1 == 0)
   {
-    printf("\n  The archive string \"%s\" does not contain query string \"%s\".", str1, str2);
+    sprintf(str4, "The archive string \"%s\" does not contain query string \"%s\".", str1, str2);
   }
 
   display_results(str1, str2, str3, str4);
