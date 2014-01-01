@@ -29,15 +29,23 @@ display_help()
 get_strings(str1, str2, str3)
 char str1[32], str2[4], str3[8];
 {
-  printf("  Enter the archive string: ");
-  scanf("%s", str1);
-  fflush(stdin);
+	get_string(str1, "archive", 32);
+	get_string(str2, "query", 4);
+	get_string(str3, "replacement", 8);
+}
 
-  printf("  Enter the query string: ");
-  scanf("%s", str2);
-  fflush(stdin);
-
-  printf("  Enter the replacement string: ");
-  scanf("%s", str3);
-  fflush(stdin);
+get_string(str, name, max_len)
+char str[32], name[16];
+int max_len;
+{
+	for(;;)
+	{
+		printf("  Enter the %s string (Maximum length = %d characters): ", name, max_len);
+		scanf("%s", str);
+		fflush(stdin);
+		if( strlen(str) <= max_len )
+		{
+			break;
+		}
+	}
 }
