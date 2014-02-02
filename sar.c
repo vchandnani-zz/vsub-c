@@ -60,6 +60,7 @@ main()
 		}
 	}
 
+	display_results( str1, str2, str3, str4 );
 } // end main()
 
 display_help()
@@ -153,4 +154,14 @@ char *start_ptr, *end_ptr, *dest_copy_ptr;
 		*ptr2 = *ptr1;
 	  printf( "\n DEST STR: copied %c to %c", *ptr1, *ptr2 ); 
 	}
+}
+
+display_results(str1, str2, str3, str4)
+char str1[32], str2[4], str3[8], str4[1024];
+{
+  printf("\n  Archive String: %s", str1);
+  printf("\n  Query String: %s", str2);
+  printf("\n  Replacement String: %s", str3);
+  printf("\n  Final Result String: %s", str4);
+  printf("\n");
 }
