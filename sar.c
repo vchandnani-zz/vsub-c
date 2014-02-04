@@ -25,7 +25,8 @@ main()
 	start_ptr = str1;
 	copy_ptr = str4;
 
-	while( *start_ptr != '\0' )
+//	while( *start_ptr != '\0' )
+	while( start_ptr <= ( str1 + strlen( str1 ) ) ) 
 	{
 printf( "\n START ptr = %c", *start_ptr );
   	match_ptr = search_strings( str1, str2, start_ptr );
@@ -57,6 +58,8 @@ printf( "\n NO MATCH: RESULT STR4: %s", str4 );
 			else
 			{
 				printf( "\n The archive string does not contain the query string." );
+				strcpy( str4, "N/A" );
+				break;
 			}
 			start_ptr ++;
 		}
