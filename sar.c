@@ -27,30 +27,32 @@ main()
 
 	while( *start_ptr != '\0' )
 	{
+printf( "\n START ptr = %c", *start_ptr );
   	match_ptr = search_strings( str1, str2, start_ptr );
 		if( match_ptr )
 		{ 
 			match_ctr ++;
-// printf("\n if - match ctr = %d", match_ctr);
-// printf( "\n MATCH %d: need to start copy/replace", match_ctr );
+printf( "\n if - MATCH ctr %d: need to start copy/replace", match_ctr );
 			// RESULT STRING: copy from archive string start location to match location
 			copy_strings( start_ptr, match_ptr, str4, copy_ptr );
 			copy_ptr += match_ptr - start_ptr;
 			// RESULT STRING: copy entire replacement string, i.e. replace query string
 			copy_strings( ptr3, ptr3 + strlen( str3 ), str4, copy_ptr );
-// printf( "\n MATCH: RESULT STR4: %s", str4 );
+printf( "\n MATCH: RESULT STR4: %s", str4 );
 			start_ptr = match_ptr + strlen(str2);
 			copy_ptr += strlen( str3 );
-// printf( "\n continue searching from %c", *start_ptr );
+printf( "\n continue searching from %c", *start_ptr );
 		}
 		else
 		{
-// printf("\n else - match ctr = %d", match_ctr);
+printf("\n else - match ctr = %d", match_ctr);
 			if( match_ctr != 0)
 			{
 				// RESULT STRING: copy from archive string last match location until end
+printf( "\n NO MATCH: copy from last match start ptr %c until end", *start_ptr );
 				copy_strings( start_ptr, str1 + strlen( str1 ), str4, copy_ptr );
-// printf( "\n NO MATCH: RESULT STR4: %s", str4 );
+printf( "\n NO MATCH: RESULT STR4: %s", str4 );
+				break;
 			}
 			else
 			{
@@ -117,7 +119,7 @@ char *start_ptr;
 
   for( ptr1=start_ptr, ptr2=str2, ctr1=0; *ptr1!='\0'; ptr1++, ctr1++ )
   {
-// printf("\n array index %d - comparing STR1: %c with STR2: %c", ctr1, *ptr1, *ptr2);
+printf( "\n array index %d - comparing STR1: %c with STR2: %c", ctr1, *ptr1, *ptr2);
     if( *ptr1 == *ptr2 )
     {
       match_ptr1 = ptr1;
@@ -128,7 +130,7 @@ char *start_ptr;
       {
 				// calculate match start location 
 				match_ptr1 = match_ptr1 - strlen( str2 ) + 1;
-// printf( "\n MATCH: STR1 contains STR2 at character %c", *match_ptr1 );
+printf( "\n MATCH: STR1 contains STR2 at character %c", *match_ptr1 );
 				ptr2 = str2;
 				ctr2 = 0;
 				return match_ptr1;
@@ -136,11 +138,13 @@ char *start_ptr;
 		}
     else
     {
-// printf( "\n NO MATCH ");
+printf( "\n search_strings: NO MATCH ");
+      match_ptr1 = NULL;
       ptr2 = str2;
       ctr2 = 0;
     }
 	}
+// printf( "\n search_strings: match_ptr1 = %c", *match_ptr1 );
 	return match_ptr1;
 }
 
@@ -153,7 +157,7 @@ char *start_ptr, *end_ptr, *dest_copy_ptr;
 	for( ptr1 = start_ptr, ptr2 = dest_copy_ptr; ptr1 < end_ptr; ptr1 ++, ptr2 ++ )
 	{
 		*ptr2 = *ptr1;
-// printf( "\n DEST STR: copied %c to %c", *ptr1, *ptr2 ); 
+printf( "\n DEST STR: copied %c to %c", *ptr1, *ptr2 ); 
 	}
 }
 
