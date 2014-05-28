@@ -1,14 +1,18 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 // debug_flag = 1 => debugging code is enabled
 // debug_flag = 0 => debugging code is disabled
 int debug_flag = 0;
 
-main()
+int main()
 {
+	void display_help();
+	void get_strings();
   char *search_strings();
-	char *copy_strings();
+	void copy_strings();
+	void display_results();
 
 	char str1[32], str2[4], str3[8], str4[1024];
   char *ptr1, *ptr2, *ptr3, *ptr4;;
@@ -29,7 +33,7 @@ main()
 	start_ptr = str1;
 	copy_ptr = str4;
 
-//	while( *start_ptr != '\0' )
+//	TO DO: while( *start_ptr != '\0' )
 	while( start_ptr <= ( str1 + strlen( str1 ) ) ) 
 	{
 if( debug_flag == 1 )
@@ -76,9 +80,10 @@ printf( "\n NO MATCH: RESULT STR4: %s", str4 );
 	}
 
 	display_results( str1, str2, str3, str4 );
+	return 0;
 } // end main()
 
-display_help()
+void display_help()
 {
   system( "tput clear" );
   puts( "  Welcome to the String Search and Replace Program."  );
@@ -96,15 +101,16 @@ display_help()
   puts( "" );
 }
 
-get_strings( str1, str2, str3 )
+void get_strings( str1, str2, str3 )
 char str1[32], str2[4], str3[8];
 {
+	void get_string();
 	get_string( str1, "archive", 32 );
 	get_string( str2, "query", 4 );
 	get_string( str3, "replacement", 8 );
 }
 
-get_string( str, name, max_len )
+void get_string( str, name, max_len )
 char str[32], name[16];
 int max_len;
 {
@@ -164,7 +170,7 @@ printf( "\n search_strings: NO MATCH ");
 	return match_ptr1;
 }
 
-char *copy_strings( start_ptr, end_ptr, dest_str, dest_copy_ptr )
+void copy_strings( start_ptr, end_ptr, dest_str, dest_copy_ptr )
 char dest_str[1024];
 char *start_ptr, *end_ptr, *dest_copy_ptr;
 {
@@ -178,7 +184,7 @@ printf( "\n DEST STR: copied %c to %c", *ptr1, *ptr2 );
 	}
 }
 
-display_results( str1, str2, str3, str4 )
+void display_results( str1, str2, str3, str4 )
 char str1[32], str2[4], str3[8], str4[1024];
 {
   printf( "\n  Archive String: %s", str1 );
