@@ -15,7 +15,7 @@ int main()
 	void display_results();
 
 	char str1[32], str2[4], str3[8], str4[1024];
-  char *ptr1, *ptr2, *ptr3, *ptr4;;
+  char *ptr1, *ptr2, *ptr3;
 	char *start_ptr, *match_ptr, *copy_ptr;
 	int match_ctr;
 
