@@ -10,8 +10,7 @@ string with the replacement string and displays the final result string.
 Inputs:  Archive String, Query String and Replacement String.
 Outputs: Result String
 
-Example
-=======
+Example:
 Archive String:     "abcd"
 Query String:       "bc"
 Replacement String: "1234"
